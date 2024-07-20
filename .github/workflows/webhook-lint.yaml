@@ -1,0 +1,21 @@
+name: Lint Webhook
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/webhook-lint.yaml'
+      - 'webhook/.swiftlint.yml'
+      - 'webhook/**/*.swift'
+
+jobs:
+  SwiftLint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: GitHub Action for SwiftLint (Only files changed in the PR)
+        uses: norio-nomura/action-swiftlint@3.2.1
+        with:
+          args: --strict
+        env:
+          WORKING_DIRECTORY: webhook
