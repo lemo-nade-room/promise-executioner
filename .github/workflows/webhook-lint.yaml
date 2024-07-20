@@ -22,4 +22,4 @@ jobs:
         with:
           args: --strict
         env:
-          WORKING_DIRECTORY: ${{ github.workspace }}/webhook
+          WORKING_DIRECTORY: webhook
