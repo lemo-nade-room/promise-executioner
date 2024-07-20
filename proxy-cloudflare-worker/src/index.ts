@@ -12,7 +12,20 @@
  */
 
 export default {
-	async fetch(request, env, ctx): Promise<Response> {
-		return new Response('Hello World!');
+	async fetch(request, env, _ctx): Promise<Response> {
+		const url = new URL(request.url);
+		const pathname = url.pathname;
+
+		if (pathname.startsWith('/api/')) {
+			return await proxy(request, env.API_URL);
+		}
+		return await proxy(request, env.WEB_CLIENT_URL);
 	},
 } satisfies ExportedHandler<Env>;
+
+async function proxy(req: Request, to: string): Promise<Response> {
+	const url = new URL(req.url);
+	url.hostname = to;
+	const response = await fetch(url);
+	return new Response(response.body as BodyInit, response);
+}
