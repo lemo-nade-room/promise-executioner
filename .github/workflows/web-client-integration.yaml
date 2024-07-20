@@ -1,0 +1,24 @@
+name: Integrate Web Client
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/web-client-integration.yaml'
+      - 'web-client/**/*.ts'
+      - 'web-client/**/*.js'
+      - 'web-client/package.json'
+      - 'web-client/bun.lockb'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: ./web-client
+    steps:
+      - uses: actions/checkout@v4
+      - run: bun install
+      - run: bun run check
+      - run: bun run lint
+      - run: bun run test:unit
+      - run: bun run build

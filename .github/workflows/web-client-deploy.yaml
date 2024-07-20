@@ -1,0 +1,35 @@
+name: Deploy Web Client
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/web-client-deploy.yaml'
+      - 'web-client/src/*'
+      - 'web-client/static/*'
+      - 'web-client/bun.lockb'
+      - 'web-client/package.json'
+      - 'web-client/svelte.config.js'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: ./web-client
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: bun install
+
+      - run: bun run build
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ secrets.CLOUDFLARE_PAGES_PROJECT_NAME }}
+          directory: ./web-client/.svelte-kit/cloudflare
+          wranglerVersion: '3'
