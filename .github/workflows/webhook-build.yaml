@@ -1,0 +1,31 @@
+name: Build Webhook
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/webhook-build.yaml'
+      - 'webhook/**/*.swift'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./webhook
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: swift-actions/setup-swift@v2
+        with:
+          swift-version: "5.10"
+
+      - run: swift build -c release
+
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v4
+        with:
+          name: webhook-binary
+          path: ./webhook/.build/release/App
+          retention-days: 1
