@@ -6,7 +6,7 @@ import struct Foundation.UUID
 /// afterwards with `@unchecked Sendable`.
 final class Todo: Model, @unchecked Sendable {
     static let schema = "todos"
-    
+
     @ID(key: .id)
     var id: UUID?
 
@@ -19,7 +19,7 @@ final class Todo: Model, @unchecked Sendable {
         self.id = id
         self.title = title
     }
-    
+
     func toDTO() -> TodoDTO {
         .init(
             id: self.id,
