@@ -21,7 +21,11 @@ jobs:
         with:
           swift-version: "5.10"
 
-      - run: rm Package.resolved
+      - run: |
+          rm Package.resolved
+          sed -i '/.package(url: "https:\/\/github.com\/realm\/SwiftLint.git", branch: "main"),/d' Package.swift
+          sed -i '/.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLint"),/d' Package.swift
+          swift package resolve
 
       - run: swift build -c release
 
