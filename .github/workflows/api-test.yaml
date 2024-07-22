@@ -25,4 +25,6 @@ jobs:
         with:
           swift-version: "5.10"
 
+      - run: swift build
+
       - run: swift test
