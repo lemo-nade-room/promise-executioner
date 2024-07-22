@@ -1,11 +1,11 @@
-name: Lint Webhook
+name: Lint API
 
 on:
   pull_request:
     paths:
-      - '.github/workflows/webhook-lint.yaml'
-      - 'webhook/.swiftlint.yml'
-      - 'webhook/**/*.swift'
+      - '.github/workflows/api-lint.yaml'
+      - 'api/.swiftlint.yml'
+      - 'api/**/*.swift'
 
 jobs:
   SwiftLint:
@@ -19,4 +19,4 @@ jobs:
         with:
           args: --strict
         env:
-          WORKING_DIRECTORY: webhook
+          WORKING_DIRECTORY: api
