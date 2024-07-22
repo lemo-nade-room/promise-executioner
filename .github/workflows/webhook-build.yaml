@@ -21,6 +21,8 @@ jobs:
         with:
           swift-version: "5.10"
 
+      - run: swift package resolve
+
       - run: swift build -c release
 
       - name: 'Upload Artifact'
