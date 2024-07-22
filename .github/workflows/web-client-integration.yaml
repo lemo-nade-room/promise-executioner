@@ -11,7 +11,7 @@ on:
 jobs:
   integrate:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 20
     defaults:
       run:
         working-directory: ./web-client

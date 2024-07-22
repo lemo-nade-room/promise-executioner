@@ -1,8 +1,8 @@
 name: Deploy Web Client
 on:
   push:
-    branches:
-      - main
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
     paths:
       - '.github/workflows/web-client-deploy.yaml'
       - 'web-client/src/*'
@@ -14,7 +14,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 20
     defaults:
       run:
         working-directory: ./web-client
