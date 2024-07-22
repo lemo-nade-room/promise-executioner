@@ -52,7 +52,6 @@ analyzer_rules:
   - unused_import
 included:
   - Sources
-  - Tests
   - Package.swift
 strict: true
 line_length: 120
