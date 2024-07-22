@@ -21,7 +21,7 @@ jobs:
         with:
           swift-version: "5.10"
 
-      - run: swift package resolve
+      - run: swift package resolve $([ -f ./Package.resolved ] && echo "--force-resolved-versions" || true)
 
       - run: swift build -c release
 
