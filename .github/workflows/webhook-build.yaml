@@ -29,5 +29,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: webhook-binary
-          path: ./webhook/.build/release/
+          path: ./webhook/.build/release/App
           retention-days: 1
