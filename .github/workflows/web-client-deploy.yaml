@@ -1,8 +1,8 @@
 name: Deploy Web Client
 on:
   push:
-    branches:
-      - main
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
     paths:
       - '.github/workflows/web-client-deploy.yaml'
       - 'web-client/src/*'
