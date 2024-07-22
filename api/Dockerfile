@@ -17,7 +17,7 @@ WORKDIR /build
 # as long as your Package.swift/Package.resolved
 # files do not change.
 COPY ./Package.* ./
-RUN swift package resolve \
+RUN CI = true swift package resolve \
         $([ -f ./Package.resolved ] && echo "--force-resolved-versions" || true)
 
 # Copy entire repo into container
@@ -25,7 +25,7 @@ COPY . .
 
 # Build everything, with optimizations, with static linking, and using jemalloc
 # N.B.: The static version of jemalloc is incompatible with the static Swift runtime.
-RUN swift build -c release \
+RUN CI=true swift build -c release \
                 --static-swift-stdlib \
                 -Xlinker -ljemalloc
 
