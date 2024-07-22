@@ -21,7 +21,7 @@ jobs:
         with:
           swift-version: "5.10"
 
-      - run: export CI=true && swift build -c release
+      - run: CI=true swift build -c release
 
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v4
