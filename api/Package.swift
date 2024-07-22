@@ -1,6 +1,6 @@
 // swift-tools-version:5.10
-import PackageDescription
 import Foundation
+import PackageDescription
 
 let package = Package(
     name: "api",
@@ -19,7 +19,7 @@ let package = Package(
         // SwiftLint
         .package(url: "https://github.com/realm/SwiftLint.git", branch: "main"),
         // SwiftTesting
-        .package(url: "https://github.com/apple/swift-testing.git", from: "0.10.0")
+        .package(url: "https://github.com/apple/swift-testing.git", from: "0.10.0"),
     ],
     targets: [
         .executableTarget(
@@ -29,7 +29,7 @@ let package = Package(
                 .product(name: "FluentPostgresDriver", package: "fluent-postgres-driver"),
                 .product(name: "Vapor", package: "vapor"),
                 .product(name: "NIOCore", package: "swift-nio"),
-                .product(name: "NIOPosix", package: "swift-nio")
+                .product(name: "NIOPosix", package: "swift-nio"),
             ],
             swiftSettings: swiftSettings,
             plugins: swiftLintPlugins
@@ -39,16 +39,16 @@ let package = Package(
             dependencies: [
                 .target(name: "App"),
                 .product(name: "XCTVapor", package: "vapor"),
-                .product(name: "Testing", package: "swift-testing")
+                .product(name: "Testing", package: "swift-testing"),
             ],
             swiftSettings: swiftSettings
-        )
+        ),
     ]
 )
 
 var swiftSettings: [SwiftSetting] { [
     .enableUpcomingFeature("DisableOutwardActorInference"),
-    .enableExperimentalFeature("StrictConcurrency")
+    .enableExperimentalFeature("StrictConcurrency"),
 ] }
 
 var swiftLintPlugins: [Target.PluginUsage] {

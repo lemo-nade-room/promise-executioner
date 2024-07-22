@@ -1,6 +1,6 @@
-import NIOSSL
 import Fluent
 import FluentPostgresDriver
+import NIOSSL
 import Vapor
 
 // configures your application
